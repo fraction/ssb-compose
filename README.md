@@ -5,18 +5,11 @@
 
 ## Table of Contents
 
-- [Quickstart](#quickstart)
 - [Install](#install)
 - [Usage](#usage)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Quickstart
-
-```
-npx ssb-compose
-```
 
 ## Install
 
