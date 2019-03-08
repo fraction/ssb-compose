@@ -2,15 +2,13 @@
   "name": "ssb-compose",
   "version": "1.2.2",
   "description": "experimental exposer built on choo",
-  "main": "bin/start.js",
+  "main": "bin/start.sh",
   "scripts": {
-    "build": "bin/build.sh",
-    "postinstall": "npm run build",
-    "start": "npm run build && bin/start.js",
+    "start": "bin/start.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "ssb-compose": "bin/start.js"
+    "ssb-compose": "bin/start.sh"
   },
   "author": "Christian Bundy",
   "license": "ISC",

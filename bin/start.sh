@@ -7,3 +7,5 @@ PATH="$(cd "$PKGDIR" && npm bin):$PATH"
 
 cd $PKGDIR
 browserify -t sheetify "$PKGDIR/src/client.js" | indexhtmlify > "$PKGDIR/build/index.html"
+
+exec $PKGDIR/bin/start.js
