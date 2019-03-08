@@ -9,8 +9,6 @@ const ssbServer = require('ssb-server')
   .use(require('ssb-server/plugins/master'))
   .use(require('ssb-ws'))
 
-debug.enabled = true
-
 const caps = {
   shs: '1KHLiKZvAvjbY1ziZEHMXawbCEIM6qwjCDm3VYRan/s='
 }
@@ -40,7 +38,6 @@ module.exports = () => {
   const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'build', 'index.html'), 'utf8')
 
   app.use(async (ctx, next) => {
-    debug('%O', ctx)
     if (ctx.request.url === '/?' + token) {
       const ssbSecret = JSON.stringify(config.keys)
       const script = `<script>window.ssbSecret = ${ssbSecret}</script>`
@@ -52,8 +49,8 @@ module.exports = () => {
   })
 
   app.listen(port)
-  debug('opening browser')
-  const url = `http://localhost:${port}/?${token}`
 
+  const url = `http://localhost:${port}/?${token}`
+  debug(`opening browser: ${url}`)
   opn(url)
 }
