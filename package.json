@@ -1,6 +1,6 @@
 {
   "name": "ssb-compose",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "experimental exposer built on choo",
   "main": "bin/start.js",
   "scripts": {
