@@ -7,9 +7,6 @@
     "start": "bin/start.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": {
-    "ssb-compose": "bin/start.sh"
-  },
   "author": "Christian Bundy",
   "license": "ISC",
   "dependencies": {
