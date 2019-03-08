@@ -5,7 +5,7 @@
   "main": "bin/index.js",
   "scripts": {
     "install": "browserify -t sheetify src/client.js | indexhtmlify > build/index.html",
-    "start": "bin/index.js",
+    "start": "npm run install && bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {

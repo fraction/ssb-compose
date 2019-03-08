@@ -3,6 +3,7 @@ const debug = require('debug')('ssb-compose')
 const fs = require('fs')
 const opn = require('opn')
 const path = require('path')
+const crypto = require('crypto')
 const ssbConfig = require('ssb-config/inject')
 const ssbServer = require('ssb-server')
   .use(require('ssb-server/plugins/master'))
@@ -19,7 +20,7 @@ const customConfig = {
   connections: {
     incoming: {
       ws: [{
-        scope: ['public', 'local', 'device'],
+        scope: ['device'],
         port: 9000,
         transform: 'shs'
       }]
@@ -29,22 +30,30 @@ const customConfig = {
 
 const config = ssbConfig('ssb', customConfig)
 
-ssbServer(config)
+module.exports = () => {
+  const token = crypto.randomBytes(256).toString('hex')
+  ssbServer(config)
 
-const app = new Koa()
-const port = 8000
+  const app = new Koa()
+  const port = 8000
 
-const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'build', 'index.html'), 'utf8')
+  const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'build', 'index.html'), 'utf8')
 
-app.use(async (ctx, next) => {
-  ctx.response.body = indexHtml
-  return next()
-})
+  app.use(async (ctx, next) => {
+    debug('%O', ctx)
+    if (ctx.request.url === '/?' + token) {
+      const ssbSecret = JSON.stringify(config.keys)
+      const script = `<script>window.ssbSecret = ${ssbSecret}</script>`
+      ctx.response.body = indexHtml + script
+      return next()
+    } else {
+      ctx.throw(401, 'unauthorized')
+    }
+  })
 
-const encodedKeys = Buffer.from(JSON.stringify(config.keys)).toString('base64')
+  app.listen(port)
+  debug('opening browser')
+  const url = `http://localhost:${port}/?${token}`
 
-app.listen(port)
-debug('opening browser')
-const url = `http://localhost:${port}?secret=${encodedKeys}`
-
-opn(url)
+  opn(url)
+}

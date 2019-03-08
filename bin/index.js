@@ -1,3 +1,5 @@
-#!/usr/bin/env
+#!/usr/bin/env node
 
-module.exports = require('../src/server')
+const path = require('path')
+
+module.exports = require(path.join(__dirname, '..', 'src', 'server'))()

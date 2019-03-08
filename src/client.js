@@ -7,13 +7,6 @@ var devtools = require('choo-devtools')
 var html = require('choo/html')
 var raw = require('nanohtml/raw')
 
-const u = new URL(document.location.href)
-const sliceLength = '?secret='.length
-const encodedKeys = u.search.slice(sliceLength)
-const keys = JSON.parse(Buffer.from(encodedKeys, 'base64').toString('binary'))
-
-const ssbConfig = ssbConfigInject('ssb', { keys })
-
 var app = choo()
 app.use(devtools())
 app.use(identityStore)
@@ -22,6 +15,9 @@ app.route('/', mainView)
 app.mount('body')
 
 function mainView (state, emit) {
+  let keys = window.ssbSecret
+
+  const ssbConfig = ssbConfigInject('ssb', { keys })
   let remote = null
 
   if (state.id == null) {
@@ -109,7 +105,6 @@ function mainView (state, emit) {
 
   return html`
     <body class=${body}>
-      <p><strong>warning:</strong> your secret key is embedded in the URL! don't screenshot it or share it with others.</p>
       <div class=${container}>
         <textarea oninput="${setOutput}">${state.markdown}</textarea>
         <div>
