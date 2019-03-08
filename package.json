@@ -4,7 +4,8 @@
   "description": "experimental exposer built on choo",
   "main": "bin/start.sh",
   "scripts": {
-    "start": "bin/start.sh",
+    "start": "npm run build && bin/start.js",
+    "build": "browserify -t sheetify src/client.js | indexhtmlify > build/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christian Bundy",

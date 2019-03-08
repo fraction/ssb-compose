@@ -13,13 +13,13 @@
 ## Install
 
 ```sh
-npm install -g ssb-compose
+git clone git@github.com:fraction/ssb-compose.git && cd ssb-compose
 ```
 
 ## Usage
 
 ```sh
-ssb-compose
+npm start
 ```
 
 ## Maintainers
