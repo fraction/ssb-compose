@@ -2,10 +2,14 @@
   "name": "ssb-compose",
   "version": "1.0.0",
   "description": "experimental exposer built on choo",
-  "main": "index.js",
+  "main": "bin/index.js",
   "scripts": {
-    "start": "browserify -t sheetify src/client.js | indexhtmlify > build/index.html && node src/server.js",
+    "install": "browserify -t sheetify src/client.js | indexhtmlify > build/index.html",
+    "start": "bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ssb-compose": "bin/index.js"
   },
   "author": "Christian Bundy",
   "license": "ISC",

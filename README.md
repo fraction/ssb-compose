@@ -1,6 +1,5 @@
 # ssb-compose
 
-
 > simple web editor for scuttlebutt markdown
 
 ## Table of Contents
@@ -13,14 +12,14 @@
 
 ## Install
 
-```
-git clone git@github.com:fraction/ssb-compose.git
+```sh
+npm install -g ssb-compose
 ```
 
 ## Usage
 
-```
-npm start
+```sh
+ssb-compose
 ```
 
 ## Maintainers
